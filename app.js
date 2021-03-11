@@ -21,7 +21,7 @@ mongoose.connect(process.env.DATABASE, {
 app.use(bodyParser.json());
 
 // route middleware
-app.use('/auth', authRoute);
+app.use('/', authRoute);
 
 const port = process.env.PORT || 8001;
 
