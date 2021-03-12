@@ -7,6 +7,7 @@ dotenv.config();
 
 // import route
 const authRoute = require('./routes/auth');
+const userRoute = require('./routes/user');
 
 // main app
 const app = express();
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 
 // route middleware
 app.use('/', authRoute);
+app.use('/user', userRoute);
 
 const port = process.env.PORT || 8001;
 
