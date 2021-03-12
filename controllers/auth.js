@@ -73,6 +73,7 @@ exports.signin = (req, res) => {
 
 		const token = jwt.sign({ 
 			userId: user._id,
+			name: user.name,
 			email: user.email,
 			role: user.role
 		}, process.env.JWT_SECRET, { expiresIn: '8h' });
