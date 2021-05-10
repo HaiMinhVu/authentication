@@ -21,7 +21,12 @@ const userSchema = new mongoose.Schema(
 		role: {
 			type: Number,
 			default: 0
-		}
+		},
+		isAdmin: {
+			type: Number,
+			default: 0
+		},
+		departments: []
 	},
 	{ timestamps: true }
 );
