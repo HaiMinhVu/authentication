@@ -35,8 +35,10 @@ exports.signin = (req, res) => {
 		const token = jwt.sign({ 
 			userId: user._id,
 			name: user.name,
-			email: user.email,
-			role: user.role
+			// email: user.email,
+			role: user.role,
+			isAdmin: user.isAdmin,
+			departments: user.departments
 		}, process.env.JWT_SECRET, { expiresIn: '8h' });
 		return res.json(token);
 	});
