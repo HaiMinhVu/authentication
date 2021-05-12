@@ -35,7 +35,7 @@ exports.signin = (req, res) => {
 		const token = jwt.sign({ 
 			userId: user._id,
 			name: user.name,
-			// email: user.email,
+			email: user.email,
 			role: user.role,
 			isAdmin: user.isAdmin,
 			departments: user.departments
