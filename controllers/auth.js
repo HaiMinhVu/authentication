@@ -59,7 +59,7 @@ exports.authenticateToken = (req, res, next) => {
 	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
 	    if(err){
 	    	return res.status(403).json({
-				error: "You don'nt have permission to access this page"
+				error: "You do not have permission to access this page"
 			})
 	    }
 	    next()
