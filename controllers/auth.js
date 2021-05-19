@@ -62,7 +62,21 @@ exports.authenticateToken = (req, res, next) => {
 				error: "You don'nt have permission to access this page"
 			})
 	    }
-		// req.user = user;
 	    next()
 	});
+}
+
+exports.authenticateStaticToken = (req, res, next) => {
+	const token = req.headers.authorization;
+	if (token == null){
+		return res.status(401).json({
+			error: 'Unauthorized'
+		});
+	}
+	if(token !== process.env.STATIC_TOKEN){
+		return res.status(403).json({
+			error: "Token not verify"
+		});
+	}
+	next();
 }

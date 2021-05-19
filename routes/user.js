@@ -4,10 +4,10 @@ const router = express.Router();
 const { authenticateToken, isAdmin } = require('../controllers/auth');
 const { create, findAll, findOne, update, deleteOne } = require('../controllers/user');
 
-router.post('/', authenticateToken, create);
-router.get('/', authenticateToken, findAll);
-router.get('/:id', authenticateToken, findOne);
-router.put('/:id', authenticateToken, update);
-router.delete('/:id', authenticateToken, deleteOne);
+router.post('/user', authenticateToken, create);
+router.get('/users', authenticateToken, findAll);
+router.get('/user/:id', authenticateToken, findOne);
+router.put('/user/:id', authenticateToken, update);
+router.delete('/user/:id', authenticateToken, deleteOne);
 
 module.exports = router;

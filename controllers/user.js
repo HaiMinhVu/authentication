@@ -5,6 +5,8 @@ const options = {
 	new: true
 }
 
+
+
 exports.create = (req, res) => {
 	const user = new User(req.body);
 	user.setPassword(req.body.password);
@@ -19,7 +21,8 @@ exports.create = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-	User.find((err, users) => {
+	var query = User.find({}).select(["name", "email", "departments", "role", "isAdmin"]);
+	query.exec((err, users) => {
 		if(!users || err){
 			return res.status(400).json({
 				error: errorHandler(err)
@@ -30,14 +33,13 @@ exports.findAll = (req, res) => {
 }
 
 exports.findOne = (req, res) => {
-	User.findById(req.params.id, (err, user) => {
+	var query = User.findById(req.params.id).select(["name", "email", "departments", "role", "isAdmin"]);
+	query.exec((err, user) => {
 		if(!user || err){
 			return res.status(400).json({
 				error: errorHandler(err)
 			});
 		}
-		user.hash = undefined;
-		user.salt = undefined;
 		res.json(user);
 	});
 }
@@ -49,12 +51,11 @@ exports.update = (req, res) => {
 				error: errorHandler(err)
 			});
 		}
-  		user.name = req.body.name;
-  		user.email = req.body.email;
-  		if(req.body.password !== ''){
+  		if(req.body.password){
   			user.setPassword(req.body.password);
   		}
-  		user.save((err, updatedUser) => {
+  		Object.assign(user, req.body);
+		user.save((err, updatedUser) => {
 			if(!updatedUser || err){
 				return res.status(400).json({
 					error: errorHandler(err)
